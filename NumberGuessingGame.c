@@ -17,14 +17,13 @@ Number Guessing Game:
 /* Function declaration prototype */
 void playGame(int max);
 void changeMaxNumber(int *max);
-void checkMaxReference(int *max);
+int checkMaxReference();
 
 /* Main */
 int main()
 {
     // maxValue can be changed by user during program's runtime
-    int maxValue = DEFAULT_MAX;
-    checkMaxReference(&maxValue);
+    int maxValue = checkMaxReference();
 	do
 	{
         printf("*******************************\n");
@@ -100,7 +99,7 @@ void changeMaxNumber(int *max)
 }
 
 /* scan and check for existing file that store max value */
-void checkMaxReference(int *max)
+int checkMaxReference()
 {
     FILE *fp;
     fp = fopen("MaxValueSaved.txt", "r");
@@ -108,6 +107,7 @@ void checkMaxReference(int *max)
     if(fp) {
         fscanf(fp, "%d", &maxValue);
         fclose(fp);
+        return maxValue;
     }
-    *max = maxValue;
+    return DEFAULT_MAX;
 }
