@@ -14,11 +14,13 @@ Number Guessing Game:
 */
 #include "Tools.h"
 
-void playGame();
-// void changeMaxNumber();
+void playGame(int max);
+void changeMaxNumber(int *max);
+// void checkForMaxReference();
 
 int main()
 {
+    int maxValue; // maxValue can be changed by user during program's runtime
 	do
 	{
         printf("*******************************\n");
@@ -26,20 +28,55 @@ int main()
         printf("Press 1 to play game.\n");
         printf("Press 2 to change the max number.\n");
         printf("Press 3 to quit.\n");
-        printf("************************\n");
-        int userInput = getBoundedInt("please choose 1 of the 3 options: ",1,3);
+        printf("*******************************\n");
+        int userInput = getBoundedInt("Please choose 1 of the 3 options: ",1,3);
         switch(userInput)
         {
-            case 1: playGame();        break;
-            // case 2: changeMaxNumber(); break;
-            case 3: break;
+            case 1: 
+                playGame(maxValue); 
+                continue;
+            case 2: 
+                changeMaxNumber(&maxValue); 
+                continue;
+            case 3: 
+                printf("Thank you for playing, see you next time!\n");
+                return 0;
         }
-	} while (getBool("Are you sure you want to quit? (Y/N): "));
-
-	return 0;
+	} while (1);
 }
 
-void playGame()
+void playGame(int max)
 {
+    time_t t;
+    // check and read file for max value
+    int min = 1; //max = 100;
 
+    // generate random number from min and max value
+    srand((unsigned) time(&t));
+    int randomNum = rand() % max;
+    printf("Your guessing range is between (%d...%d) \n", min, max);
+    char userInput[10];
+    do
+    {
+        printf("Your guess: ");
+        scanf("%s", userInput);
+        clean_stdin();
+        if(userInput[0] == 'q')    break;
+        else
+        {
+            int userGuess = atoi(userInput);
+            // printf("the input number was: %d\n", userGuess);
+            if(userGuess == randomNum) {
+                printf("\nCongratulation, You are the winner!!!\n");
+                break;
+            }
+            else if(userGuess < min || userGuess > max) {
+                printf("No negative number and within the bounds...\n");
+                continue;
+            }
+            else if (userGuess < randomNum) printf("Oops, Too low!\n");
+            // else here means userGuess > randomNum
+            else                            printf("Argh, Too High!\n");
+        }
+    } while (1);
 }
