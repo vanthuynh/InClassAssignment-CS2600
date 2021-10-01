@@ -16,7 +16,6 @@ Number Guessing Game:
 
 void playGame(int max);
 void changeMaxNumber(int *max);
-// void checkForMaxReference();
 
 int main()
 {
@@ -48,8 +47,7 @@ int main()
 void playGame(int max)
 {
     time_t t;
-    // check and read file for max value
-    int min = 1; //max = 100;
+    int min = 1;
 
     // generate random number from min and max value
     srand((unsigned) time(&t));

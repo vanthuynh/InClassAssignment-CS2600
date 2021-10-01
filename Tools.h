@@ -14,7 +14,6 @@ enum {DEFAULT_MAX = 10};
 void clean_stdin();
 int getUserInt(char *prompt);
 int getBoundedInt(char *prompt, int lowBound, int highBound);
-int getInputWithStopSignal(char *prompt, int lowBound, int highBound);
 double getUserDouble(char *prompt);
 double getBoundedDouble(char *prompt, double lowBound, double highBound);
 int getBool(char *prompt);

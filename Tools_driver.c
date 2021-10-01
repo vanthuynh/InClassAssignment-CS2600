@@ -19,7 +19,7 @@ int getUserInt(char *prompt)
     int userInput;
     while(1)
     {
-        printf(prompt);
+        printf("%s",prompt);
         scanf("%d",&userInput);
         if(userInput >= 0)  return userInput;
         printf("*Note: No negative number please...\n");
@@ -54,20 +54,6 @@ int getBoundedInt(char *prompt, int lowBound, int highBound)
     }
     return userInput;
 }
-
-int getInputWithStopSignal(char *prompt, int lowBound, int highBound)
-{
-    int userInput;
-    while(1)
-    {
-        printf(prompt);
-        scanf("%d",&userInput);
-        if(userInput >= 0)  return userInput;
-        printf("*Note: No negative number please...\n");
-        clean_stdin();
-    }
-}
-
 /* compare and return the user input in assigned range*/
 double getBoundedDouble(char *prompt, double lowBound, double highBound)
 {
