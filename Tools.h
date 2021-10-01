@@ -9,7 +9,7 @@
 
 /* const variable declaration */
 extern const int MAX_BOUND;
-enum {DEFAULT_MAX = 10};
+enum {DEFAULT_MAX = 10, DEFAULT_MIN = 1};
 
 /* function declaration prototype */
 void clean_stdin();

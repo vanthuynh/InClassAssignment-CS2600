@@ -74,7 +74,7 @@ void playGame(int max)
                 break;
             }
             else if(userGuess < min || userGuess > max) {
-                printf("No negative number and within the bounds...\n");
+                printf("*No negative number and within the bounds...\n");
                 continue;
             }
             else if (userGuess < randomNum) printf("Oops, Too low!\n");
@@ -87,15 +87,24 @@ void playGame(int max)
 /* Option 2 - ask for user's prefer max value and save in a file */
 void changeMaxNumber(int *max)
 {
+    // ask user for new max boundary
     int status,userInput;
-    printf("Please choose a max value in the range [1...%d]\n", MAX_BOUND);
-    status = scanf("%d", &userInput);
-    while(status!=1) {
-        clean_stdin();
-        printf("*Invalid Input...\n*No (-)integer and within [1...%d]\n Enter again: ", MAX_BOUND);
+    while(1) {
+        printf("Please choose a max value in the range [1...%d]: ", MAX_BOUND);
         status = scanf("%d", &userInput);
+        if(status == 1 && userInput > DEFAULT_MIN && userInput < MAX_BOUND)
+        {
+            *max = userInput;
+            break;
+        }
+        clean_stdin();
+        printf("*Invalid Input...\n*No (-)integer and within [1...%d]\n", MAX_BOUND);
     }
-    *max = userInput;
+    // store maxValue into MaxValueSaved.txt
+    FILE *fp;
+    fp = fopen("MaxValueSaved.txt", "w+");
+    fprintf(fp, "%d", userInput);
+    fclose(fp);
 }
 
 /* scan and check for existing file that store max value */
