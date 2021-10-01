@@ -14,12 +14,17 @@ Number Guessing Game:
 */
 #include "Tools.h"
 
+/* Function declaration prototype */
 void playGame(int max);
 void changeMaxNumber(int *max);
+void checkMaxReference(int *max);
 
+/* Main */
 int main()
 {
-    int maxValue = DEFAULT_MAX; // maxValue can be changed by user during program's runtime
+    // maxValue can be changed by user during program's runtime
+    int maxValue = DEFAULT_MAX;
+    checkMaxReference(&maxValue);
 	do
 	{
         printf("*******************************\n");
@@ -44,6 +49,7 @@ int main()
 	} while (1);
 }
 
+/* Option 1 - Manage gameplay */
 void playGame(int max)
 {
     time_t t;
@@ -79,6 +85,7 @@ void playGame(int max)
     } while (1);
 }
 
+/* Option 2 - ask for user's prefer max value and save in a file */
 void changeMaxNumber(int *max)
 {
     int status,userInput;
@@ -90,4 +97,17 @@ void changeMaxNumber(int *max)
         status = scanf("%d", &userInput);
     }
     *max = userInput;
+}
+
+/* scan and check for existing file that store max value */
+void checkMaxReference(int *max)
+{
+    FILE *fp;
+    fp = fopen("MaxValueSaved.txt", "r");
+    int maxValue;
+    if(fp) {
+        fscanf(fp, "%d", &maxValue);
+        fclose(fp);
+    }
+    *max = maxValue;
 }

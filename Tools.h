@@ -11,6 +11,7 @@
 extern const int MAX_BOUND;
 enum {DEFAULT_MAX = 10};
 
+/* function declaration prototype */
 void clean_stdin();
 int getUserInt(char *prompt);
 int getBoundedInt(char *prompt, int lowBound, int highBound);
