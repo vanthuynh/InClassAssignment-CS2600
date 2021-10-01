@@ -20,7 +20,7 @@ void changeMaxNumber(int *max);
 
 int main()
 {
-    int maxValue; // maxValue can be changed by user during program's runtime
+    int maxValue = DEFAULT_MAX; // maxValue can be changed by user during program's runtime
 	do
 	{
         printf("*******************************\n");
@@ -79,4 +79,17 @@ void playGame(int max)
             else                            printf("Argh, Too High!\n");
         }
     } while (1);
+}
+
+void changeMaxNumber(int *max)
+{
+    int status,userInput;
+    printf("Please choose a max value in the range [1...%d]\n", MAX_BOUND);
+    status = scanf("%d", &userInput);
+    while(status!=1) {
+        clean_stdin();
+        printf("*Invalid Input...\n*No (-)integer and within [1...%d]\n Enter again: ", MAX_BOUND);
+        status = scanf("%d", &userInput);
+    }
+    *max = userInput;
 }

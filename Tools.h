@@ -9,6 +9,7 @@
 
 /* const variable declaration */
 extern const int MAX_BOUND;
+enum {DEFAULT_MAX = 10};
 
 void clean_stdin();
 int getUserInt(char *prompt);
